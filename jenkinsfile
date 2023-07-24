@@ -1,0 +1,32 @@
+pipeline{
+agent any
+stages{
+  stage("code clone"){
+   steps{
+    git url :"https://github.com/Zilani1996/django-todo-cicd",branch:"develop"
+    }
+  }
+  stage("code build"){
+    steps{
+          echo "Build the image"
+         sh "docker build -t my-note-app1 . "
+        } 
+    }
+     stage("push the docker Hub"){
+       steps{
+          echo "Push the image to docker hub"
+           withCredentials([usernamePassword(credentialsId:"dockerHub",passwordVariable:"dockerHubPass",usernameVariable:"dockerHubUser")]){
+           sh "docker tag my-note-app1 ${env.dockerHubUser}/my-note-app1:latest"
+           sh "docker login -u ${env.dockerHubUser} -p ${env.dockerHubPass} "
+           sh "docker push ${env.dockerHubUser}/my-note-app1:latest"
+           }
+
+           }
+     }
+     stage("deploy code"){
+         steps{
+          sh "docker-compose down && docker-compose up -d"
+              }
+        }
+  }
+}
