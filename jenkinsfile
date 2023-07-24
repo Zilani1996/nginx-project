@@ -3,22 +3,22 @@ agent any
 stages{
   stage("code clone"){
    steps{
-    git url :"https://github.com/Zilani1996/django-todo-cicd",branch:"develop"
+    git url :"https://github.com/Zilani1996/nginix-project",branch:"master"
     }
   }
   stage("code build"){
     steps{
           echo "Build the image"
-         sh "docker build -t my-note-app1 . "
+         sh "docker build -t Trips Pass . "
         } 
     }
      stage("push the docker Hub"){
        steps{
           echo "Push the image to docker hub"
            withCredentials([usernamePassword(credentialsId:"dockerHub",passwordVariable:"dockerHubPass",usernameVariable:"dockerHubUser")]){
-           sh "docker tag my-note-app1 ${env.dockerHubUser}/my-note-app1:latest"
+           sh "docker tag Trips Pass ${env.dockerHubUser}/Trips Pass:latest"
            sh "docker login -u ${env.dockerHubUser} -p ${env.dockerHubPass} "
-           sh "docker push ${env.dockerHubUser}/my-note-app1:latest"
+           sh "docker push ${env.dockerHubUser}/Trips Pass:latest"
            }
 
            }
