@@ -1,5 +1,5 @@
 FROM nginx:alpine
 ## Copy a new configuration file setting listen port to 8080
-##COPY ./default.conf /etc/nginx/conf.d/
+COPY index.html /var/www/html
 EXPOSE 8000
 CMD ["nginx", "-g", "daemon off;"]
