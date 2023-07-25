@@ -3,7 +3,7 @@ agent any
 stages{
   stage("code clone"){
    steps{
-    git url :"https://github.com/Zilani1996/nginix-project",branch:"master"
+    git url :"https://github.com/Zilani1996/nginx-project",branch:"master"
     }
   }
   stage("code build"){
