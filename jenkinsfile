@@ -9,7 +9,7 @@ stages{
   stage("code build"){
     steps{
           echo "Build the image"
-         sh "docker build -t server . "
+         sh "docker build -t server ."
         } 
     }
      stage("push the docker Hub"){
