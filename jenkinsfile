@@ -16,9 +16,9 @@ stages{
        steps{
           echo "Push the image to docker hub"
            withCredentials([usernamePassword(credentialsId:"dockerHub",passwordVariable:"dockerHubPass",usernameVariable:"dockerHubUser")]){
-           sh "docker tag server1 ${env.dockerHubUser}/server:latest"
+           sh "docker tag server1 ${env.dockerHubUser}/server5:latest"
            sh "docker login -u ${env.dockerHubUser} -p ${env.dockerHubPass} "
-           sh "docker push ${env.dockerHubUser}/server:latest"
+           sh "docker push ${env.dockerHubUser}/server5:latest"
            }
 
            }
