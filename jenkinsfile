@@ -9,16 +9,16 @@ stages{
   stage("code build"){
     steps{
           echo "Build the image"
-         sh "docker build -t tripspass . "
+         sh "docker build -t server . "
         } 
     }
      stage("push the docker Hub"){
        steps{
           echo "Push the image to docker hub"
            withCredentials([usernamePassword(credentialsId:"dockerHub",passwordVariable:"dockerHubPass",usernameVariable:"dockerHubUser")]){
-           sh "docker tag tripspass ${env.dockerHubUser}/tripspass:latest"
+           sh "docker tag server1 ${env.dockerHubUser}/server:latest"
            sh "docker login -u ${env.dockerHubUser} -p ${env.dockerHubPass} "
-           sh "docker push ${env.dockerHubUser}/tripspass:latest"
+           sh "docker push ${env.dockerHubUser}/server:latest"
            }
 
            }
